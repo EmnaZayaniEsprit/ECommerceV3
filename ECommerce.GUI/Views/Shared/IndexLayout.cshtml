@@ -1,0 +1,99 @@
+﻿
+<!DOCTYPE html>
+<!--[if IE 8]> <html class="ie8"> <![endif]-->
+<!--[if IE 9]> <html class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html>
+ <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <title>Venedor - Responsive eCommerce Template</title>
+    <meta name="description" content="Responsive modern ecommerce Html5 Template">
+    <!--[if IE]> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic%7CPT+Gudea:400,700,400italic%7CPT+Oswald:400,700,300' rel='stylesheet' id="googlefont">
+
+    <link rel="stylesheet" href="/Content/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/Content/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/Content/css/prettyPhoto.css">
+    <link rel="stylesheet" href="/Content/css/colpick.css">
+    <link rel="stylesheet" href="/Content/css/sequence-slider.css">
+    <link rel="stylesheet" href="/Content/css/owl.carousel.css">
+    <link rel="stylesheet" href="/Content/css/style.css">
+    <link rel="stylesheet" href="/Content/css/responsive.css">
+
+    <!-- Favicon and Apple Icons -->
+    <link rel="icon" type="image/png" href="/Content/images/icons/icon.html">
+    <link rel="apple-touch-icon" sizes="57x57" href="/Content/images/icons/apple-icon-57x57.html">
+    <link rel="apple-touch-icon" sizes="72x72" href="/Content/images/icons/apple-icon-72x72.html">
+
+    <!--- jQuery -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/Content/js/jquery-1.11.0.min.js"><\/script>')</script>
+    <!--[if lt IE 9]>
+        <script src="/Content/js/html5shiv.js"></script>
+        <script src="/Content/js/respond.min.js"></script>
+    <![endif]-->
+
+    <style id="custom-style">
+
+    </style>
+</head>
+<body>
+         @RenderPage("optionPanel.cshtml")
+    <!-- End #option panel -->
+        
+    <div id="wrapper">
+         @RenderPage("header.cshtml")
+        <!-- End #header -->
+         @RenderPage("sliderSequence.cshtml")
+
+         @RenderPage("produit.cshtml")
+        <!-- End inser list de produit ici #content -->
+
+         @RenderBody()
+
+         @RenderPage("footer.cshtml")
+     <!-- End #footer -->
+    
+    
+   
+    </div><!-- End #wrapper -->
+    <a href="#" id="scroll-top" title="Scroll to Top"><i class="fa fa-angle-up"></i></a><!-- End #scroll-top -->
+    <!-- END -->
+    <script src="/Content/js/bootstrap.min.js"></script>
+    <script src="/Content/js/smoothscroll.js"></script>
+    <script src="/Content/js/retina-1.1.0.min.js"></script>
+    <script src="/Content/js/jquery.placeholder.js"></script>
+    <script src="/Content/js/jquery.hoverIntent.min.js"></script>
+    <script src="/Content/js/twitter/jquery.tweet.min.js"></script>
+    <script src="/Content/js/jquery.flexslider-min.js"></script>
+    <script src="/Content/js/owl.carousel.min.js"></script>
+    <script src="/Content/js/jflickrfeed.min.js"></script>
+    <script src="/Content/js/jquery.prettyPhoto.js"></script>
+    <script src="/Content/js/jquery.sequence-min.js"></script>
+    <script src="/Content/js/colpick.js"></script>
+    <script src="/Content/js/main.js"></script>
+
+    <script>
+        $(function () {
+            // Sequence.js Slider Plugin
+            var options = {
+                nextButton: true,
+                prevButton: true,
+                pagination: true,
+                autoPlay: true,
+                autoPlayDelay: 8500,
+                pauseOnHover: true,
+                preloader: true,
+                theme: 'slide',
+                speed: 700,
+                animateStartingFrameIn: true
+            },
+				homeSlider = $('#slider-sequence').sequence(options).data("sequence");
+
+        });
+    </script>
+</body>
+</html>
