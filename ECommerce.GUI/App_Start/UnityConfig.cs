@@ -59,6 +59,12 @@ namespace ECommerce.GUI.App_Start
             container.RegisterType<IShoppingCartRepository, ShoppingCartRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IUserRepository, UserRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IProductService, ProductService>(new PerRequestLifetimeManager());
+            container.RegisterType<IProductSupplierService, ProductSupplierService>(new PerRequestLifetimeManager());
+            container.RegisterType<ICategorySupplierService, CategorySupplierService>(new PerRequestLifetimeManager());
+            container.RegisterType<IPromotionSupplierService, PromotionSupplierService>(new PerRequestLifetimeManager());
+            container.RegisterType<IUserSupplierService, UserSupplierService>(new PerRequestLifetimeManager());
+            container.RegisterType<IPictureSupplierService, PictureSupplierService>(new PerRequestLifetimeManager());
+
         }
     }
 }

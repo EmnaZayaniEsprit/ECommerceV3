@@ -1,0 +1,214 @@
+﻿@model ECommerce.Data.Models.product
+
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/IndexLayoutSupplier.cshtml";
+}
+
+
+<div class="accordion-header">
+    <div class="accordion-title">
+     <span>Create Product </span></div><!-- End .accordion-title -->
+    
+</div>
+
+@using (Html.BeginForm("Create", "ProductSupplier", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="panel-body">
+
+        <div id="billing" class="collapse in" style="height: auto;">
+
+
+            <div class="form-horizontal">
+                
+                <hr />
+                @Html.ValidationSummary(true)
+
+                
+
+                
+                <div class="input-group">
+
+                    <span class="input-group-addon">
+                        <span class="input-text">
+
+                            @Html.LabelFor(model => model.currency, new { @class = "control-label col-md-2" })
+                        </span>
+                    </span>
+                    <div class="col-md-10">
+                        <input type="text" id="currency" name="currency" required="" class="form-control input-lg" placeholder="Curency">
+                        @Html.ValidationMessageFor(model => model.date)
+                    </div>
+                </div>
+
+
+
+                <div class="input-group">
+
+                    <span class="input-group-addon">
+                        <span class="input-text">
+
+                            @Html.LabelFor(model => model.date, new { @class = "control-label col-md-2" })
+                        </span>
+                    </span>
+                    <div class="col-md-10">
+                        <input class="form-control input-lg" data-val="true" data-val-date="The field date must be a date." id="date" name="date" type="datetime" value="">
+
+                        @Html.ValidationMessageFor(model => model.date)
+                    </div>
+                </div>
+
+                <div class="input-group">
+
+                    <span class="input-group-addon">
+                        <span class="input-text">
+                            @Html.LabelFor(model => model.description, new { @class = "control-label col-md-2" })
+                        </span>
+                    </span>
+                    <div class="col-md-10">
+                        <input class="form-control input-lg" id="description" name="description" type="text" value="">
+
+                        @Html.ValidationMessageFor(model => model.description)
+                    </div>
+                </div>
+
+                <div class="input-group">
+
+                    <span class="input-group-addon">
+                        <span class="input-text">
+                            @Html.LabelFor(model => model.name, new { @class = "control-label col-md-2" })
+                        </span>
+                    </span>
+
+                    <div class="col-md-10">
+                        <input class="form-control input-lg" id="name" name="name" type="text" value="">
+
+                        @Html.ValidationMessageFor(model => model.name)
+                    </div>
+                </div>
+
+                <div class="input-group">
+
+                    <span class="input-group-addon">
+                        <span class="input-text">
+                            @Html.LabelFor(model => model.price, new { @class = "control-label col-md-2" })
+                        </span>
+                    </span>
+
+                    <div class="col-md-10">
+                        <input class="form-control input-lg" data-val="true" data-val-number="The field price must be a number." data-val-required="The price field is required." id="price" name="price" type="text" value="">
+
+                        @Html.ValidationMessageFor(model => model.price)
+                    </div>
+                </div>
+
+                <div class="input-group">
+
+                    <span class="input-group-addon">
+                        <span class="input-text">
+                            @Html.LabelFor(model => model.quantity, new { @class = "control-label col-md-2" })
+                        </span>
+                    </span>
+
+                    <div class="col-md-10">
+                        <input class="form-control input-lg" data-val="true" data-val-number="The field quantity must be a number." data-val-required="The quantity field is required." id="quantity" name="quantity" type="number" value="">
+
+                        @Html.ValidationMessageFor(model => model.quantity)
+                    </div>
+                </div>
+
+                <div class="input-group">
+
+                    <span class="input-group-addon">
+                        <span class="input-text">
+                            @Html.LabelFor(model => model.taxe, new { @class = "control-label col-md-2" })
+                        </span>
+                    </span>
+
+                    <div class="col-md-10">
+                        <input class="form-control input-lg" data-val="true" data-val-number="The field taxe must be a number." data-val-required="The taxe field is required." id="taxe" name="taxe" type="text" value="">
+
+                        @Html.ValidationMessageFor(model => model.taxe)
+                    </div>
+                </div>
+                <div class="input-group">
+
+                    <span class="input-group-addon">
+                        <span class="input-text">
+                            <label class="control-label col-md-2">Upload Image</label>
+                        </span>
+                    </span>
+
+                    <div class="col-md-10">
+                        <input class="form-control input-lg" id="image" name="image" multiple accept='image/* ' type="file">
+                    </div>
+                </div>
+                <div class="input-group">
+
+                    <span class="input-group-addon">
+                        <span class="input-text">
+                            @Html.LabelFor(model => model.category_idCategory, "Category", new { @class = "control-label col-md-2" })
+                        </span>
+                    </span>
+
+                    <div class="col-md-10">
+                        @Html.DropDownList("category_idCategory", null,String.Empty, new { @class = "form-control input-lg" })
+                       
+                        @Html.ValidationMessageFor(model => model.category_idCategory)
+                    </div>
+                </div>
+
+                <div class="input-group">
+
+                    <span class="input-group-addon">
+                        <span class="input-text">
+                            @Html.LabelFor(model => model.promotion_idPromotion, "Promotion", new { @class = "control-label col-md-2" })
+                        </span>
+                    </span>
+
+
+                    <div class="col-md-10">
+                        @Html.DropDownList("promotion_idPromotion",null,String.Empty, new { @class = "form-control input-lg" })
+                        @Html.ValidationMessageFor(model => model.promotion_idPromotion)
+                    </div>
+                </div>
+
+                <div class="input-group">
+
+                    <span class="input-group-addon">
+                        <span class="input-text">
+                            @Html.LabelFor(model => model.supplier_idUser, "Supplier", new { @class = "control-label col-md-2" })
+                        </span>
+                    </span>
+
+
+                    <div class="col-md-10">
+                        @Html.DropDownList("supplier_idUser", null, String.Empty, new { @class = "form-control input-lg" })
+                        @Html.ValidationMessageFor(model => model.supplier_idUser)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-custom-2" />
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+
+
+

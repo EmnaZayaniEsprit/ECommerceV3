@@ -44,7 +44,7 @@ namespace ECommerce.Data.Models.Mapping
             this.HasOptional(t => t.promotion)
                 .WithMany(t => t.products)
                 .HasForeignKey(d => d.promotion_idPromotion);
-
+            
         }
     }
 }

@@ -1,0 +1,141 @@
+﻿@model ECommerce.Data.Models.product
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/IndexLayoutSupplier.cshtml";
+}
+
+
+
+
+<h2>Details</h2>
+
+<div>
+   
+    <hr />
+    
+</div>
+
+<div class="row">
+
+    <div class="col-md-6 col-sm-12 col-xs-12 product-viewer clearfix">
+
+
+
+        <div id="product-image-container">
+            <figure>
+                <div id="mlens_wrapper_0" style="width: 300px;">
+                <img src="@Url.Action("Transfer", "ProductSupplier", new { idPicture = @Html.DisplayFor(model => model.pictures.ElementAt(0).idPicture) })" alt="Product Big image" id="product-image" data-big="images/products/big-phone1.jpg" data-id="mlens_0"><div id="mlens_target_0" style="width: 150px; height: 150px; float: left; display: none; border: 4px solid rgb(153, 153, 153); position: absolute; border-top-left-radius: 0px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px; cursor: none; background-image: url(file:///C:/Users/majdii/Desktop/venedor/green/images/products/big-phone1.jpg); background-size: auto; background-position: 0px 0px; background-repeat: no-repeat;" class="">&nbsp;</div><img style="display:none;width:auto;height:auto;max-width:none;max-height;none;" src="images/products/big-phone1.jpg"></div>
+
+            </figure>
+        </div><!-- product-image-container -->
+    </div><!-- End .col-md-6 -->
+
+    <div class="col-md-6 col-sm-12 col-xs-12 product">
+        <div class="lg-margin visible-sm visible-xs"></div><!-- Space -->
+        <h1 class="product-name">@Html.DisplayFor(model => model.name)</h1>
+        <div class="ratings-container">
+            <div class="ratings separator">
+                <div class="ratings-result" data-result="70" style="width: 65.8px;"></div>
+            </div><!-- End .ratings -->
+            <span class="ratings-amount separator">
+                3 Review(s)
+            </span>
+            <span class="separator">|</span>
+            <a href="#review" class="rate-this">Add Your Review</a>
+        </div><!-- End .rating-container -->
+        <ul class="product-list">
+            <li><span>Availability:</span>@Html.DisplayFor(model => model.quantity)</li>
+            <li><span>Product Code:</span>@Html.DisplayFor(model => model.idProduct)</li>
+            <li><span>Price:</span>@Html.DisplayFor(model => model.price) </span>@Html.DisplayFor(model => model.currency) </li>
+            <li><span>Promotion:</span>@Html.DisplayFor(model => model.promotion.nomPromotion)</li>
+            <li><span>Added Date:</span>@Html.DisplayFor(model => model.date)</li>
+        </ul>
+        <hr>
+        <!-- End .product-color-filter-container-->
+        <!-- End .product-size-filter-container-->
+        <hr>
+        <div class="product-add clearfix">
+
+            <a href="#" class="btn btn-custom-2">Edit </a>
+        </div><!-- .product-add -->
+        <div class="product-add clearfix">
+            <br /><br />
+            <a href="#" class="btn btn-custom-2">Back TO List</a>
+        </div>
+        <div class="md-margin"></div><!-- Space -->
+        <div class="product-extra clearfix">
+
+            <div class="md-margin visible-xs"></div>
+            <div class="share-button-group">
+                <!-- AddThis Button BEGIN -->
+                <div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+                    <a class="addthis_button_facebook"></a>
+                    <a class="addthis_button_twitter"></a>
+                    <a class="addthis_button_email"></a>
+                    <a class="addthis_button_print"></a>
+                    <a class="addthis_button_compact"></a><a class="addthis_counter addthis_bubble_style"></a>
+                </div>
+                <script type="text/javascript">var addthis_config = { "data_track_addressbar": true };</script>
+                <script type="text/javascript" src="../../../../s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52b2197865ea0183"></script>
+                <!-- AddThis Button END -->
+            </div><!-- End .share-button-group -->
+        </div>
+    </div><!-- End .col-md-6 -->
+
+
+</div>
+
+
+
+
+<div>
+    <div class="row">
+        <div class="col-md-9 col-sm-12 col-xs-12">
+
+            <div class="tab-container left product-detail-tab clearfix">
+                <ul class="nav-tabs" style="height: 250px;">
+                    <li class="active"><a href="#nameProduct" data-toggle="tab">Name Product</a></li>
+                    <li class=""><a href="#description" data-toggle="tab">description</a></li>
+                    <li class=""><a href="#promotion" data-toggle="tab">Promotion</a></li>
+
+
+                </ul>
+                <div class="tab-content clearfix">
+
+                    <div class="tab-pane active" id="nameProduct">
+                        <p> @Html.DisplayFor(model => model.name)  </p>
+
+                    </div><!-- End .tab-pane -->
+
+                    <div class="tab-pane" id="description">
+                        <p> @Html.DisplayFor(model => model.description)  </p>
+
+                        <ul class="product-details-list">
+                            <li>3rd gen Intel® Core™ i7 quad core processor available;</li>
+                            <li>Windows 8 Pro available;</li>
+                            <li>13.3" and 15.5" screen sizes available;</li>
+                            <li>Double your battery life with available sheet battery;</li>
+                            <li>4th gen Intel® Core™ i7 processor available;</li>
+                            <li>Full HD TRILUMINOS IPS touchscreen (1920 x 1080);</li>
+                            <li>Super fast 512GB PCIe SSD available;</li>
+                            <li>Ultra-light at just 2.34 lbs.</li>
+                            <li>And more...</li>
+                        </ul>
+                    </div><!-- End .tab-pane -->
+
+                    <div class="tab-pane" id="promotion">
+
+                        <p>  @Html.DisplayFor(model => model.promotion.description)   </p>
+                        <p>  @Html.DisplayFor(model => model.promotion.dateDebut)   </p>
+                        <p>  @Html.DisplayFor(model => model.promotion.dateFin)   </p>
+                        <p>  @Html.DisplayFor(model => model.promotion.taux)   </p>
+                    </div><!-- End .tab-pane -->
+                    <!-- End .tab-pane -->
+                    <!-- End .tab-pane -->
+                </div><!-- End .tab-content -->
+            </div><!-- End .tab-container -->
+            <div class="lg-margin visible-xs"></div>
+        </div>
+    </div>
+</div>

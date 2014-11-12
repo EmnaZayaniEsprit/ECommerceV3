@@ -43,11 +43,19 @@ namespace ECommerce.Data.Infrastructure
             IEnumerable<T> objects = dbset.Where<T>(where).AsEnumerable(); foreach (T obj in objects) dbset.Remove(obj); 
         } 
         
-        public virtual T GetById(long id) { 
-          return dbset.Find(id); } 
+        public virtual T GetById(long id) {
+
+            //long idLong = Convert.ToInt64(id);
+
+            return dbset.Find(id);
+        } 
         
         public virtual T GetById(string id) { 
-            return dbset.Find(id); } 
+            return dbset.Find(id); }
+        public virtual T GetById(int id)
+        {
+            return dbset.Find(id);
+        } 
         public virtual IEnumerable<T> GetAll() { 
             return dbset.ToList(); 
         }

@@ -197,6 +197,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\ProductSupplierController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -259,6 +260,7 @@
     <Content Include="Content\images\italy-flag.png" />
     <Content Include="Content\images\logo-commerce.jpg" />
     <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\no-photo.jpg" />
     <Content Include="Content\images\panel\boxed.png" />
     <Content Include="Content\images\panel\brushmac%402x.png" />
     <Content Include="Content\images\panel\brushmac.png" />
@@ -523,6 +525,11 @@
     <Content Include="Views\Shared\produit.cshtml" />
     <Content Include="Views\Shared\sliderSequence.cshtml" />
     <Content Include="Views\Shared\widgetSuscribe.cshtml" />
+    <Content Include="Views\Shared\IndexLayoutSupplier.cshtml" />
+    <Content Include="Views\ProductSupplier\Index.cshtml" />
+    <Content Include="Views\ProductSupplier\Create.cshtml" />
+    <Content Include="Views\ProductSupplier\Details.cshtml" />
+    <Content Include="Views\ProductSupplier\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

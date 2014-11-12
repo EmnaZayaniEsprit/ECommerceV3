@@ -1,0 +1,107 @@
+﻿@model IEnumerable<ECommerce.Data.Models.product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/IndexLayoutSupplier.cshtml";
+}
+
+<h2>Liste des vos produit </h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+
+
+
+<div id="products-tabs-content" class="row tab-content">
+    <!-- End .tab-pane -->
+
+</div><!-- End #products-tabs-content -->
+
+
+<div id="confirm" class="collapse in">
+    <div class="panel-body">
+
+        <div class="table-responsive">
+            <table class="table checkout-table">
+                <thead>
+                    <tr>
+                        <th class="table-title">Product Name</th>
+                        <th class="table-title">Product Code</th>
+                        <th class="table-title">Unit Price</th>
+                        <th class="table-title">Quantity</th>
+                        <th class="table-title">Category</th>
+                        <th class="table-title">Promotion</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                @foreach (var item in Model)
+                      {
+                      <tr>
+                        <td class="item-name-col">
+                             <figure>
+                     @if (@item.pictures.Count > 0)
+{
+    <a href="/ProductSupplier/Details/@item.idProduct">
+        <img src="@Url.Action("Transfer", "ProductSupplier", new { idPicture =(@item.pictures.ElementAt(0).idPicture) }  )" alt="Lowlands Lace Blouse">
+    </a>
+}
+else if (@item.pictures.Count == 0)
+{
+                        <a href="/ProductSupplier/Details/@item.idProduct">
+                         <img src="/Content/images/no-photo.jpg"  class="item-image" alt="Lowlands Lace Blouse"></a>
+                     }
+    
+             </figure>
+                            <header class="item-name"><a href="#">@item.name</a></header>
+                            <ul>
+                                @item.description
+                            </ul>
+                        </td>
+                        <td class="item-code">MP125984154 @item.idProduct  </td>
+                      
+                        <td class="item-price-col"><span class="item-price-special">@item.price @item.currency</span></td>
+                        <td>
+                            <div class="custom-quantity-input">
+                                <label>  @item.quantity   </label>
+                               
+                                  </div>
+                        </td>
+                        <td class="item-total-col">
+                            <span class="item-price-special"> @item.category.name </span>
+                          
+                        </td>
+                          <td class="item-total-col">
+                              <span class="item-price-special"> @item.promotion.nomPromotion</span>
+
+                          </td>
+                          <td class="item-total-col">
+                              <a href="@Url.Action("Delete", "ProductSupplier", new { id =(@item.idProduct) }  )" class="close-button"></a>
+
+                          </td>
+                    </tr>
+                   
+
+}               
+                    
+                    
+
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td class="checkout-total-title" colspan="4"><strong>TOTAL:</strong></td>
+                        <td class="checkout-total-price cart-total"><strong>$434.50</strong></td>
+                    </tr>
+                </tfoot>
+            </table>
+
+        </div><!-- End .table-reponsive -->
+        <div class="lg-margin"></div><!-- space -->
+        <div class="text-right">
+            <input type="submit" class="btn btn-custom-2" value="CONFIRM ORDER">
+        </div>
+    </div><!-- End .panel-body -->
+</div>
+
