@@ -39,8 +39,8 @@ namespace ECommerce.GUI.App_Start
 
             // TODO: Register your types here
 
-            container.RegisterType<IUnitOfWork, UnitOfWork>(new TransientLifetimeManager());
-            container.RegisterType<IDatabaseFactory, DatabaseFactory>(new TransientLifetimeManager());
+            container.RegisterType<IUnitOfWork, UnitOfWork>(new PerRequestLifetimeManager());
+            container.RegisterType<IDatabaseFactory, DatabaseFactory>(new PerRequestLifetimeManager());
             container.RegisterType<IProductRepository, ProductRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IAddressRepository, AddressRepository>(new PerRequestLifetimeManager());
             container.RegisterType<ICategoryRepository, CategoryRepository>(new PerRequestLifetimeManager());
