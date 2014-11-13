@@ -38,7 +38,7 @@ namespace ECommerce.GUI.App_Start
             // container.LoadConfiguration();
 
             // TODO: Register your types here
-
+            
             container.RegisterType<IUnitOfWork, UnitOfWork>(new PerRequestLifetimeManager());
             container.RegisterType<IDatabaseFactory, DatabaseFactory>(new PerRequestLifetimeManager());
             container.RegisterType<IProductRepository, ProductRepository>(new PerRequestLifetimeManager());
@@ -65,6 +65,9 @@ namespace ECommerce.GUI.App_Start
             container.RegisterType<IUserSupplierService, UserSupplierService>(new PerRequestLifetimeManager());
             container.RegisterType<IPictureSupplierService, PictureSupplierService>(new PerRequestLifetimeManager());
 
+            container.RegisterType<IUserService, UserService>(new PerRequestLifetimeManager());
+            container.RegisterType<IPictureService, PictureService>(new PerRequestLifetimeManager());
+            container.RegisterType<IAddressService, AddressService>(new PerRequestLifetimeManager());
         }
     }
 }

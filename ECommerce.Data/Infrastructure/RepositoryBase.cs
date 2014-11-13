@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -29,13 +30,12 @@ namespace ECommerce.Data.Infrastructure
         { 
             dbset.Add(entity);
         }
-        public virtual void Update(T entity)
-        {
-           using(  var context =new ecommerceContext())
-           { 
+        public virtual void Update(T entity) 
+        { 
             dbset.Attach(entity);
             dataContext.Entry(entity).State = EntityState.Modified;
-        }
+           
+           
         } 
         public virtual void Delete(T entity) 
         { 
@@ -46,27 +46,11 @@ namespace ECommerce.Data.Infrastructure
             IEnumerable<T> objects = dbset.Where<T>(where).AsEnumerable(); foreach (T obj in objects) dbset.Remove(obj); 
         } 
         
-        public virtual T GetById(long id) {
-
-            //long idLong = Convert.ToInt64(id);
-
-            return dbset.Find(id);
-        }
-
-        public virtual T GetById(string id)
-        {
-
-           
-                
-              return dbset.Find(id);
-               
-          
-        }
-        public virtual T GetById(int id)
-        {
-            
-            return dbset.Find(id);
-        } 
+        public virtual T GetById(long id) { 
+          return dbset.Find(id); } 
+        
+        public virtual T GetById(string id) { 
+            return dbset.Find(id); } 
         public virtual IEnumerable<T> GetAll() { 
             return dbset.ToList(); 
         }
