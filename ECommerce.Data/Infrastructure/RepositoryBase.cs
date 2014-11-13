@@ -47,8 +47,12 @@ namespace ECommerce.Data.Infrastructure
         } 
         
         public virtual T GetById(long id) { 
-          return dbset.Find(id); } 
-        
+          return dbset.Find(id); }
+
+        public virtual T GetById(int id)
+        {
+            return dbset.Find(id);
+        } 
         public virtual T GetById(string id) { 
             return dbset.Find(id); } 
         public virtual IEnumerable<T> GetAll() { 

@@ -26,18 +26,28 @@ namespace ECommerce.GUI.Controllers
             String password = Request.Form["password"];
             Object usr = userService.AutentificationUser(login, password);
             user user = (user)usr;
-            Session["user"] = user;
+           
+            
+
             if (user != null)
             {
+                if (Session.IsNewSession) 
+                { Session["idUser"] = user.idUser; }
+                
+
                 if (user.DTYPE == "Supplier")
                 {
-                    return RedirectToAction("Index","Users");
-                    //return RedirectToAction("supplier");
+                    //return RedirectToAction("Index","Users");
+                   return RedirectToAction("supplier");
                 }
                 else
-                    return RedirectToAction("Index", "Users");
-                    //return RedirectToAction("customer");
+                    //return RedirectToAction("Index", "Users");
+                    return RedirectToAction("customer");
             }
+         
+
+            
+    
             else return View();
         }
 
