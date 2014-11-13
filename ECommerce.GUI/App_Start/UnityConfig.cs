@@ -41,7 +41,7 @@ namespace ECommerce.GUI.App_Start
 
             container.RegisterType<IUnitOfWork, UnitOfWork>(new TransientLifetimeManager());
             container.RegisterType<IDatabaseFactory, DatabaseFactory>(new TransientLifetimeManager());
-            container.RegisterType<IProductRepository, ProductRepository>(new TransientLifetimeManager());
+            container.RegisterType<IProductRepository, ProductRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IAddressRepository, AddressRepository>(new PerRequestLifetimeManager());
             container.RegisterType<ICategoryRepository, CategoryRepository>(new PerRequestLifetimeManager());
             container.RegisterType<ICommisionRepository, CommisionRepository>(new PerRequestLifetimeManager());
@@ -49,7 +49,7 @@ namespace ECommerce.GUI.App_Start
             container.RegisterType<IGouvernoratRepository, GouvernoratRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IOrderItemRepository, OrderItemRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IOrderRepository, OrderRepository>(new PerRequestLifetimeManager());
-            container.RegisterType<IPictureRepository, PictureRepository>(new TransientLifetimeManager());
+            container.RegisterType<IPictureRepository, PictureRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IProductItemRepository, ProductItemRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IProductItemSupplierRepository, ProductItemSupplierRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IPromotionRepository, PromotionRepository>(new PerRequestLifetimeManager());
@@ -59,11 +59,11 @@ namespace ECommerce.GUI.App_Start
             container.RegisterType<IShoppingCartRepository, ShoppingCartRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IUserRepository, UserRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IProductService, ProductService>(new PerRequestLifetimeManager());
-            container.RegisterType<IProductSupplierService, ProductSupplierService>(new TransientLifetimeManager());
+            container.RegisterType<IProductSupplierService, ProductSupplierService>(new PerRequestLifetimeManager());
             container.RegisterType<ICategorySupplierService, CategorySupplierService>(new PerRequestLifetimeManager());
-            container.RegisterType<IPromotionSupplierService, PromotionSupplierService>(new TransientLifetimeManager());
+            container.RegisterType<IPromotionSupplierService, PromotionSupplierService>(new PerRequestLifetimeManager());
             container.RegisterType<IUserSupplierService, UserSupplierService>(new PerRequestLifetimeManager());
-            container.RegisterType<IPictureSupplierService, PictureSupplierService>(new TransientLifetimeManager());
+            container.RegisterType<IPictureSupplierService, PictureSupplierService>(new PerRequestLifetimeManager());
 
         }
     }

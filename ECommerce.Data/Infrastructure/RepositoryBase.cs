@@ -51,12 +51,20 @@ namespace ECommerce.Data.Infrastructure
             //long idLong = Convert.ToInt64(id);
 
             return dbset.Find(id);
-        } 
-        
-        public virtual T GetById(string id) { 
-            return dbset.Find(id); }
+        }
+
+        public virtual T GetById(string id)
+        {
+
+           
+                
+              return dbset.Find(id);
+               
+          
+        }
         public virtual T GetById(int id)
         {
+            
             return dbset.Find(id);
         } 
         public virtual IEnumerable<T> GetAll() { 

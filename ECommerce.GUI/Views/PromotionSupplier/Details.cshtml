@@ -70,28 +70,20 @@
 
                             </figure>
                             <div class="item-price-container">
-                                <span class="item-price">$160<span class="sub-price">.99</span></span>
+                                <span class="item-price">@item.price $></span>
                             </div>
-                            <span class="new-rect">New</span>
-                            <span class="discount-rect">-10%</span>
+                            
+                            <span class="discount-rect">@Model.taux %</span>
                         </div><!-- End .item-image -->
                         <div class="item-meta-container">
-                            <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-result" data-result="95"></div>
-                                </div><!-- End .ratings -->
-                                <span class="ratings-amount">
-                                    1 Reviews
-                                </span>
-                            </div><!-- End .rating-container -->
-                            <h3 class="item-name"><a href="product.html">Lorem Ipsum Dolla</a></h3>
+                         
+                            <h3 class="item-name"><a href="product.html">@item.name</a></h3>
                             <div class="item-action">
                                 <a href="#" class="item-add-btn">
-                                    <span class="icon-cart-text">Add to Cart</span>
+                                    <span class="icon-cart-text">Delete from This Promotion</span>
                                 </a>
                                 <div class="item-action-inner">
-                                    <a href="#" class="icon-button icon-like">Favourite</a>
-                                    <a href="#" class="icon-button icon-compare">Checkout</a>
+                                    
                                 </div><!-- End .item-action-inner -->
                             </div><!-- End .item-action -->
                         </div><!-- End .item-meta-container -->
