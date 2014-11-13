@@ -64,7 +64,7 @@ namespace ECommerce.GUI.Controllers
         public ActionResult Details(int id)
         {
             var  product = produitService.getProductById(id);
-            var product2 = produitService.getProduct(id);
+            
 
             return View(product);
         }
@@ -125,25 +125,59 @@ namespace ECommerce.GUI.Controllers
         // GET: /ProductSupplier/Edit/5
         public ActionResult Edit(int id)
         {
-           
-            return View();
+            var product = produitService.getProductById(id);
+
+            var categories = categoryService.getAllCategory();
+            var promotions = promotionService.getAllPromotion();
+            var users = userService.getAllUser();
+            ViewBag.category_idCategory = new SelectList(categories, "idCategory", "name");
+            ViewBag.promotion_idPromotion = new SelectList(promotions, "idPromotion", "description");
+            ViewBag.supplier_idUser = new SelectList(users, "idUser", "DTYPE");
+
+
+
+
+            return View(product);
         }
 
         //
         // POST: /ProductSupplier/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit([Bind(Include = "idProduct,currency,date,description,name,price,quantity,taxe,category_idCategory,promotion_idPromotion,supplier_idUser")] product product, FormCollection collection, HttpPostedFileBase image)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
+                if (image == null)
+                {
+                    produitService.EditProduct(product);
 
-                return RedirectToAction("Index");
+
+                    return RedirectToAction("Details");
+
+                }
+                else
+                {
+                    picture img = new picture();
+
+                    img.description = image.FileName;
+
+                    img.picture1 = ConvertToBytes(image);
+                    product.pictures.Add(img);
+
+                    produitService.EditProduct(product);
+                }
+
+                return RedirectToAction("Details");
             }
-            catch
-            {
-                return View();
-            }
+
+            var categories = categoryService.getAllCategory();
+            var promotions = promotionService.getAllPromotion();
+            var users = userService.getAllUser();
+            ViewBag.category_idCategory = new SelectList(categories, "idCategory", "name");
+            ViewBag.promotion_idPromotion = new SelectList(promotions, "idPromotion", "description");
+
+            ViewBag.supplier_idUser = new SelectList(users, "idUser", "DTYPE");
+            return RedirectToAction("Edit");
         }
 
         //

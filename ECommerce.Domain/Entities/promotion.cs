@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ECommerce.Data.Models
 {
@@ -10,6 +11,8 @@ namespace ECommerce.Data.Models
             this.products = new List<product>();
         }
 
+
+        [Key]
         public int idPromotion { get; set; }
         public Nullable<System.DateTime> dateDebut { get; set; }
         public Nullable<System.DateTime> dateFin { get; set; }

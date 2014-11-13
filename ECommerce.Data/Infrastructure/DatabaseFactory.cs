@@ -11,6 +11,7 @@ namespace ECommerce.Data.Infrastructure
 {
     public class DatabaseFactory : Disposable, IDatabaseFactory
     { 
+
         private ecommerceContext dataContext;
         public ecommerceContext DataContext 
         { 

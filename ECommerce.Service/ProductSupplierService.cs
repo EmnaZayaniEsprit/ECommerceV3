@@ -17,11 +17,8 @@ namespace ECommerce.Service
 
         public FileContentResult Transfer(int idPicture)
         {
-            //var products = getAllProducts().ToList();
-            //product product = products.ToList().ElementAt(9);
 
-           // picture picture = product.pictures.ElementAt(0);
-
+           // picture picture = utow.PictureRepository.Get(x => x.idPicture == idPicture);
             picture picture = utow.PictureRepository.GetById(idPicture);
   
             byte[] imgbyte = picture.picture1;
@@ -59,6 +56,12 @@ namespace ECommerce.Service
             return utow.ProductRepository.Get(x=>x.idProduct==id);
 
         }
+        public void EditProduct(product p)
+        {
+            utow.ProductRepository.Update(p);
+            utow.Commit();
+
+        }
         
     }
 
@@ -70,6 +73,7 @@ namespace ECommerce.Service
         List<product> getAllProducts();
         product getProductById(int id);
         void DeleteProduct(product p);
+        void EditProduct(product p);
         product getProduct(int id);
     }
 

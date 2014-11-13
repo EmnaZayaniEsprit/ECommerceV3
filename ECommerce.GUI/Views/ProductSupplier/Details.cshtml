@@ -5,9 +5,6 @@
     Layout = "~/Views/Shared/IndexLayoutSupplier.cshtml";
 }
 
-
-
-
 <h2>Details</h2>
 
 <div>
@@ -57,11 +54,11 @@
         <hr>
         <div class="product-add clearfix">
 
-            <a href="#" class="btn btn-custom-2">Edit </a>
+            <a href="@Url.Action("Edit", "ProductSupplier", new { id = @Html.DisplayFor(model => model.idProduct) })" class="btn btn-custom-2">Edit </a>
         </div><!-- .product-add -->
         <div class="product-add clearfix">
             <br /><br />
-            <a href="#" class="btn btn-custom-2">Back TO List</a>
+            <a href="@Url.Action("Index", "ProductSupplier")" class="btn btn-custom-2">Back TO List</a>
         </div>
         <div class="md-margin"></div><!-- Space -->
         <div class="product-extra clearfix">

@@ -1,0 +1,121 @@
+﻿@model ECommerce.Data.Models.promotion
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/IndexLayoutSupplier.cshtml";
+}
+<div id="category-header">
+    <div class="row">
+        <div class="container">
+            <div class="col-2">
+                <div class="category-image">
+                    <img src="/Content/images/promotion1.png" alt="Phone" class="img-responsive">
+                </div><!-- End .category-image -->
+
+            </div><!-- End .col-2 -->
+
+            <div class="col-2 last">
+                <div class="category-title">
+                    <h2>@Model.nomPromotion</h2>
+                   
+                    <p>@Model.description</p>
+                    <p>@Model.dateDebut</p>
+                    <p>@Model.dateFin</p>
+                   <p>@Model.taux</p>
+                </div><!-- End .category-title -->
+            </div><!-- End .col-2 -->
+        </div><!-- End .container -->
+    </div><!-- End .row -->
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+
+            
+
+
+            <div class="purchased-items-container carousel-wrapper">
+                <header class="content-title">
+                    <div class="title-bg">
+                        <h2 class="title">Liste des Produits de cette Promotion</h2>
+                    </div><!-- End .title-bg -->
+                   
+                </header>
+
+                <div class="carousel-controls">
+                    <div id="purchased-items-slider-prev" class="carousel-btn carousel-btn-prev"></div><!-- End .carousel-prev -->
+                    <div id="purchased-items-slider-next" class="carousel-btn carousel-btn-next carousel-space"></div><!-- End .carousel-next -->
+                </div><!-- End .carousel-controllers -->
+                <div class="purchased-items-slider owl-carousel">
+                   
+              @foreach (var item in Model.products.ToList())
+              { 
+
+                     <div class="item">
+
+                        <div class="item-image-container">
+                            <figure>
+                                @if (@item.pictures.Count > 0)
+                                {
+                                    <a href="/ProductSupplier/Details/@item.idProduct">
+                                        <img src="@Url.Action("Transfer", "ProductSupplier", new { idPicture =(@item.pictures.ElementAt(0).idPicture) }  )" alt="Lowlands Lace Blouse">
+                                    </a>
+                                }
+                                else if (@item.pictures.Count == 0)
+                                {
+                                    <a href="/ProductSupplier/Details/@item.idProduct">
+                                        <img src="/Content/images/no-photo.jpg" class="item-image" alt="Lowlands Lace Blouse">
+                                    </a>
+                                }
+
+                            </figure>
+                            <div class="item-price-container">
+                                <span class="item-price">$160<span class="sub-price">.99</span></span>
+                            </div>
+                            <span class="new-rect">New</span>
+                            <span class="discount-rect">-10%</span>
+                        </div><!-- End .item-image -->
+                        <div class="item-meta-container">
+                            <div class="ratings-container">
+                                <div class="ratings">
+                                    <div class="ratings-result" data-result="95"></div>
+                                </div><!-- End .ratings -->
+                                <span class="ratings-amount">
+                                    1 Reviews
+                                </span>
+                            </div><!-- End .rating-container -->
+                            <h3 class="item-name"><a href="product.html">Lorem Ipsum Dolla</a></h3>
+                            <div class="item-action">
+                                <a href="#" class="item-add-btn">
+                                    <span class="icon-cart-text">Add to Cart</span>
+                                </a>
+                                <div class="item-action-inner">
+                                    <a href="#" class="icon-button icon-like">Favourite</a>
+                                    <a href="#" class="icon-button icon-compare">Checkout</a>
+                                </div><!-- End .item-action-inner -->
+                            </div><!-- End .item-action -->
+                        </div><!-- End .item-meta-container -->
+                    </div><!-- End .item -->
+                    
+                    
+                
+              } 
+
+                   
+
+                </div><!--purchased-items-slider -->
+            </div><!-- End .purchased-items-container -->
+
+
+
+
+
+
+
+        </div>
+    </div>
+</div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>

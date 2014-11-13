@@ -29,10 +29,13 @@ namespace ECommerce.Data.Infrastructure
         { 
             dbset.Add(entity);
         }
-        public virtual void Update(T entity) 
-        { 
+        public virtual void Update(T entity)
+        {
+           using(  var context =new ecommerceContext())
+           { 
             dbset.Attach(entity);
             dataContext.Entry(entity).State = EntityState.Modified;
+        }
         } 
         public virtual void Delete(T entity) 
         { 
