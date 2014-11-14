@@ -2,9 +2,10 @@
 
 @{
     ViewBag.Title = "Create";
+    //Layout = "~/Views/Shared/IndexLayoutCreate.cshtml";
 }
 
-<h2>Create my account</h2>
+<h2>Create a new account</h2>
 
 
 @using (Html.BeginForm("Create", "Users", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -12,7 +13,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>New Account</h4>
+        <h4>Your profile</h4>
         <hr />
         @Html.ValidationSummary(true)
 
@@ -104,36 +105,7 @@
 
        
         
-        <div class="form-group">
-            <div class="control-label col-md-2"> Number</div>
-            <div class="col-md-10">
-                <input type="number" name="number" />
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="control-label col-md-2"> Governorate</div>
-            <div class="col-md-10">
-                <input type="text" name="governorate" />
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="control-label col-md-2"> City</div>
-            <div class="col-md-10">
-                <input type="text" name="city" />
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="control-label col-md-2"> Postal Code</div>
-            <div class="col-md-10">
-                <input type="number" name="postalCode" />
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="control-label col-md-2"> Country</div>
-            <div class="col-md-10">
-                <input type="text" name="country" />
-            </div>
-        </div>
+        
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

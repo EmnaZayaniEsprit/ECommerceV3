@@ -2,6 +2,8 @@
 
 @{
     ViewBag.Title = "Edit";
+    string DType = Convert.ToString(TempData["DType"]);
+    char Sexe = Convert.ToChar(TempData["Sexe"]);
 }
 
 <h2>Edit</h2>
@@ -12,26 +14,34 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>user</h4>
+        <h4>Edit your profile</h4>
         <hr />
         @Html.ValidationSummary(true)
         <div class="form-group">
             @Html.LabelFor(model => model.DTYPE, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DTYPE)
+
+               
+               @if (DType == "supplier")
+               {
+
+               <span> Supplier </span> <input type="radio" name="Type" value="supplier" checked="checked" />
+
+               <span> Customer </span> <input type="radio" name="Type" value="customer" />
+               }
+                else
+              
+               {
+
+             <span> Supplier </span> <input type="radio" name="Type" value="supplier" />
+
+             <span> Customer </span>  <input type="radio" name="Type" value="customer" checked="checked" />
+               }
+
                 @Html.ValidationMessageFor(model => model.DTYPE)
             </div>
         </div>
-
   
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.blocked, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.blocked)
-                @Html.ValidationMessageFor(model => model.blocked)
-            </div>
-        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.email, new { @class = "control-label col-md-2" })
@@ -82,13 +92,29 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.sexe, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.sexe, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.sexe)
+                 
+        @if (Sexe == 'M')
+        { 
+               <span>Male</span>   <input type="radio" name="Sexe" value="M" checked="checked"/>
+
+                <span>Female </span><input type="radio" name="Sexe" value="F" />
+            
+        }
+        else
+        { 
+               <span>Male</span>   <input type="radio" name="Sexe" value="M" />
+
+                <span>Female </span><input type="radio" name="Sexe" value="F" checked="checked" />
+
+        }
+
+                
                 @Html.ValidationMessageFor(model => model.sexe)
             </div>
         </div>
-
+   
        
 
         <div class="form-group">

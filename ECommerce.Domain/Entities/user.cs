@@ -20,7 +20,7 @@ namespace ECommerce.Data.Models
             this.reviews = new List<review>();
         }
 
-        //[Required(ErrorMessage = "Please select an account type")]
+       // [Required(ErrorMessage = "Please select an account type")]
         [Display(Name = "You are a ")]
         public string DTYPE { get; set; }
         public int idUser { get; set; }
@@ -68,7 +68,8 @@ namespace ECommerce.Data.Models
         public virtual ICollection<creditcard> creditcards { get; set; }
         public virtual ICollection<order> orders { get; set; }
 
-       // [Required(ErrorMessage = "Please select a picture")]
+       
+       // [Required(ErrorMessage="Please select a picture")]
         [Display(Name = "Picture")]
         [DataType(DataType.ImageUrl)]
         public virtual picture picture { get; set; }

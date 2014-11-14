@@ -10,9 +10,13 @@ namespace ECommerce.Service
 {
     public class UserService : IUserService
     {
-
-       static DatabaseFactory dbfactory = new DatabaseFactory();
-        UnitOfWork utow = new UnitOfWork(dbfactory);
+        static DatabaseFactory dbfactory = null;
+        UnitOfWork utow = null;
+        public UserService()
+        {  dbfactory = new DatabaseFactory();
+           utow = new UnitOfWork(dbfactory);
+        }
+      
       
         public Object AutentificationUser(string login, string password)
         {

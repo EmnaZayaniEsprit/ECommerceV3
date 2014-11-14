@@ -32,17 +32,20 @@ namespace ECommerce.GUI.Controllers
             if (user != null)
             {
                 if (Session.IsNewSession) 
-                { Session["idUser"] = user.idUser; }
+               { 
+                Session["idUser"] = user.idUser;
+                
+                }
                 
 
                 if (user.DTYPE == "Supplier")
                 {
-                    //return RedirectToAction("Index","Users");
-                   return RedirectToAction("supplier");
+                    
+                   return RedirectToAction("Index", "ProductSupplier");
                 }
                 else
-                    //return RedirectToAction("Index", "Users");
-                    return RedirectToAction("customer");
+                  
+                    return RedirectToAction("Index", "Product");
             }
          
 

@@ -195,9 +195,9 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AddresseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LogInController.cs" />
-    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ProductSupplierController.cs" />
     <Compile Include="Controllers\PromotionSupplierController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -520,7 +520,6 @@
     <Content Include="Views\Account\Manage.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Shared\footer.cshtml" />
     <Content Include="Views\Shared\header.cshtml" />
     <Content Include="Views\Shared\IndexLayout.cshtml" />
@@ -541,6 +540,13 @@
     <Content Include="Views\Users\Create.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Users\Delete.cshtml" />
+    <Content Include="Views\Shared\IndexLayoutLogin.cshtml" />
+    <Content Include="Views\Shared\headerLogin.cshtml" />
+    <Content Include="Views\Shared\footerLogin.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Users\CreateStep2.cshtml" />
+    <Content Include="Views\Users\EditStep2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
