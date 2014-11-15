@@ -53,7 +53,7 @@ namespace ECommerce.GUI.Controllers
 
            // CODE PAR EMNA : RECUPERER ID USER
             //int iduser = Convert.ToInt32(Session["idUser"]);
-            var produits = produitService.getAllProducts().ToList();
+            //var produits = produitService.getAllProducts().ToList();
             List<int> idImages =new List<int>(); ;
             foreach (var item in produits)
             {

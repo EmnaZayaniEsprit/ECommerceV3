@@ -14,7 +14,7 @@ namespace ECommerce.Service
 
         static DatabaseFactory dbfactory = new DatabaseFactory();
         UnitOfWork utow = new UnitOfWork(dbfactory);
-        private ecommerceContext db = new ecommerceContext();
+        //private ecommerceContext db = new ecommerceContext();
         public FileContentResult Transfer(int idPicture)
         {
 
