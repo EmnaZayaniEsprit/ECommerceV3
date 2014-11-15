@@ -15,5 +15,35 @@ namespace ECommerce.Data.Models
         public virtual productitemsupplier productitemsupplier { get; set; }
         public virtual order order { get; set; }
         public virtual product product { get; set; }
+
+
+        //*****************************************************************
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(obj, null))
+            {
+                return false;
+            }
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+            if (this.GetType() != obj.GetType())
+            {
+                return false;
+            }
+            orderitem other = (orderitem)obj;
+            if (product_idProduct != other.product_idProduct)
+            {
+                return false;
+            }
+            return true;
+        }
+
+
+        //******************************************************
+
+
     }
 }

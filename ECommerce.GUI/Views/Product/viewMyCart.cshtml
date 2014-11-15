@@ -1,0 +1,157 @@
+﻿@model IEnumerable<ECommerce.Data.Models.orderitem>
+
+@{
+    Layout = "~/Views/Shared/IndexLayoutSaf.cshtml";
+    
+    var orderitems = (List<ECommerce.Data.Models.orderitem>)Session["panier"];
+    var totalAmount = float.Parse(Session["totalAmount"].ToString());
+    
+    var user = new ECommerce.Data.Models.user();
+    user.firstName = "Safouen";
+   
+
+}
+
+
+<script language="javascript">
+
+    function getSubPrices(price,idPro) {
+
+
+        var quan = document.getElementsByName('quantity+'+idPro)[0].value;
+        var elem = document.getElementById('sub+' + idPro);
+        elem.value = price * quan;
+        alert(price * quan );
+
+    }
+
+</script>
+
+<section id="content">
+    <div id="breadcrumb-container">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="index-2.html">Home</a></li>
+                <li class="active">Shopping Cart</li>
+            </ul>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <header class="content-title">
+                    <h1 class="title">Shopping Cart</h1>
+                    <p class="title-desc">Just this week, you can use the free premium delivery.</p>
+                </header>
+                <div class="xs-margin"></div><!-- space -->
+                <div class="row">
+
+                    <div class="col-md-12 table-responsive">
+
+                        <table class="table cart-table">
+                            <thead>
+                                <tr>
+                                    <th class="table-title">Product Name</th>
+                                    <th class="table-title">Product Code</th>
+                                    <th class="table-title">Unit Price</th>
+                                    <th class="table-title">Quantity</th>
+                                    <th class="table-title">SubTotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                 @foreach (var o in orderitems)
+                                            {
+
+                                <tr>
+                                    <td class="item-name-col">
+                                        <figure>
+                                            <a href="#">
+                                            @if (o.product.pictures.Count() == 0)
+                                              {
+                                                <img src="~/Content/images.png" />
+
+
+                                                }
+                                                    else
+                                                       {
+
+
+                                        <img src='@Url.Action("imageGenerate", "Product", new { id = (long)o.product_idProduct })' />
+
+                                                            }
+                                            </a>
+                                        </figure>
+                                        <header class="item-name"><a href="#">@o.product.name</a></header>
+                                        <ul>
+                                            <li>Color: White</li>
+                                            <li>Size: SM</li>
+                                        </ul>
+                                    </td>
+                                    <td class="item-code">MP125984154</td>
+                                    <td class="item-price-col"><span class="item-price-special" id="p+@o.product.idProduct">$ @o.product.price</span></td>
+                                    <td>
+                                        <div class="custom-quantity-input">
+                                            <input type="number" name="quantity+@o.product.idProduct" value="@o.quantity" id="q+@o.product.idProduct">
+                                            <a href="#" onclick="return false;" class="quantity-btn quantity-input-up"><i class="fa fa-angle-up"></i></a>
+                                            <a href="#" onclick="return false;" class="quantity-btn quantity-input-down"><i class="fa fa-angle-down"></i></a>
+                                        </div>
+                                   <br>
+                                        <a onclick="getSubPrices(@o.product.price,@o.product_idProduct)" class="btn btn-custom" style="width:112px !important">Refresh</a>
+                                     </td>
+                                    <td class="item-total-col">
+                                        <span class="item-price-special" id="sub+@o.product_idProduct">$@((o.quantity * o.product.price).ToString())</span>
+                                        <a href="#" class="close-button"></a>
+                                    </td>
+                                </tr>
+                                
+}               
+                            </tbody>
+                        </table>
+
+                    </div><!-- End .col-md-12 -->
+
+                </div><!-- End .row -->
+                <div class="lg-margin"></div><!-- End .space -->
+
+                <div class="row">
+                    <div class="col-md-8 col-sm-12 col-xs-12">
+
+                    </div>
+
+                    <div class="lg-margin visible-sm visible-xs"></div><!-- space -->
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+
+                        <table class="table total-table">
+                            <tbody>
+                                <tr>
+                                    <td class="total-table-title">Subtotal:</td>
+                                    <td>$@totalAmount</td>
+                                </tr>
+                                <tr>
+                                    <td class="total-table-title">Shipping:</td>
+                                    <td>$6.00</td>
+                                </tr>
+                                <tr>
+                                    <td class="total-table-title">TAX (0%):</td>
+                                    <td>$0.00</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td>Total:</td>
+                                    <td>$ @(totalAmount+6)</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <div class="md-margin"></div><!-- End .space -->
+                        <a href="/Product/Index" class="btn btn-custom-2">CONTINUE SHOPPING</a>
+                        <a href="@Url.Action("ValidateCommand", "Product", new { product = "Your Order Mr " + @user.firstName, totalPrice = @totalAmount.ToString() })" class="btn btn-custom" style="width:166px !important" target="_blank">Pay With Paypal</a>
+                    </div><!-- End .col-md-4 -->
+                </div><!-- End .row -->
+                <div class="lg-margin2x"></div><!-- Space -->
+
+            </div>
+        </div>
+    </div>
+</section>                     

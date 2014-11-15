@@ -1,0 +1,330 @@
+﻿@model IEnumerable<ECommerce.Data.Models.product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/IndexLayoutSaf.cshtml";
+
+    List<ECommerce.Data.Models.category> categories = (List<ECommerce.Data.Models.category>)ViewData["categories"];
+
+    var orderitems = (List<ECommerce.Data.Models.orderitem>)Session["panier"];
+    var totalAmount = float.Parse(Session["totalAmount"].ToString());
+    
+            }
+
+<script language="javascript">
+
+    function GETCOMBO() { 
+       
+        var elem = document.getElementById("catID");
+        elem.value = document.getElementsByName('state')[0].value;
+        alert(document.getElementById("catID").value);
+    }
+
+    function OKITEM() {
+
+        
+        alert("Added Succesfuly to the Cart ");
+    }
+
+
+
+</script>
+
+<style type="text/css">
+    img {
+        max-width: 200px;
+        max-height: 200px;
+    }
+</style>
+
+   <!-- <form class="pure-form pure-form-stacked"> -->
+     @using (Html.BeginForm("Index", "Product", FormMethod.Post, new { @class = "pure-form pure-form-stacked" }))
+{
+
+    <input name="catID" id="catID" type="hidden" value="100">
+
+
+           <fieldset>
+
+            <div class="pure-g">
+
+                <div class="pure-u-1 pure-u-md-1-3" style="width:300px !important">
+                    <label for="state">Category</label>
+                    <select  onchange='GETCOMBO()' name="state" id="state" class="pure-input-1-2" style="width:200px !important">
+
+                        <option value="100">All Categories...</option>
+                        <option value="99">In Promotion </option>
+
+
+                       @foreach (var c in categories)
+                       {
+
+                         <option id="state" value="@c.idCategory">@c.name</option>
+
+                      }
+
+                    </select>
+               </div>
+
+                <div class="pure-u-1 pure-u-md-1-3" style="width:300px !important">
+                    <label for="first-name">Product's Name</label>
+                    <input value ="All Products" onblur="if (this.value == '') { this.value = 'All Products'; }"
+                                onfocus="if (this.value == 'All Products') { this.value = ''; }" name="nameProd" type="text" style="width:200px !important"></div>
+
+                <div class="pure-u-1 pure-u-md-1-3" style="width:300px !important">
+                    <label for="last-name">Min Price</label>
+                    <input value="0" onblur="if (this.value == '') {this.value = '0';}"
+                           onfocus="if (this.value == '0') {this.value = '';}"  name="minPriceProd" id="last-name" type="number" min="0" style="width:200px !important">
+                </div>
+
+                <div class="pure-u-1 pure-u-md-1-3" style="width:300px !important">
+                    <label for="last-name">Max Price</label>
+                    <input value="100" onblur="if (this.value == '') {this.value = '100';}"
+                           onfocus="if (this.value == '100') {this.value = '';}"  name="maxPriceProd" id=" last-name" type="number" min="0" style="width:200px !important">
+                </div>
+
+                <div class="pure-u-1 pure-u-md-1-3" style="width:200px !important">
+                    <label for="last-name">Go and Search</label>
+
+                    <button type="submit" class=" pure-button" style="width: 200px !important; height: 40px !important; background-color: #84bb26; color: #fff " >Search</button>
+                </div>
+
+
+                </div>
+
+
+        </fieldset>
+     }
+    <!--</form>-->
+
+
+    <section id="content">
+
+        <!-- End #slider-sequence -->
+
+
+        <div class="md-margin2x"></div><!-- Space -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="row">
+
+                        <div class="col-md-9 col-sm-8 col-xs-12 main-content">
+                            <header class="content-title">
+                                <h2 class="title">Our Products</h2>
+                                <p class="title-desc">Save your money and time with our store. Here's the best part of our impressive assortment.</p>
+                            </header>
+
+                            <div class="dropdown-cart-menu-container pull-right">
+                                <div class="btn-group dropdown-cart">
+                                    <button type="button" class="btn btn-custom dropdown-toggle" data-toggle="dropdown" style="width:200px !important">
+                                        <span class="cart-menu-icon"></span>
+                                        @orderitems.Count() * item(s) <span class="drop-price">@totalAmount </span>
+                                    </button>
+
+                                    <div class="dropdown-menu dropdown-cart-menu pull-right clearfix" role="menu">
+                                        <p class="dropdown-cart-description">Recently added item(s).</p>
+                                        <ul class="dropdown-cart-product-list">
+
+                                            @foreach (var o in orderitems)
+                                            {
+                                                <li class="item clearfix">
+                                                <a href="#" title="Delete item" class="delete-item"><i class="fa fa-times"></i></a>
+                                                <a href="#" title="Edit item" class="edit-item"><i class="fa fa-pencil"></i></a>
+                                                <figure>
+                                                    <a href="product.html">
+@if (o.product.pictures.Count() == 0)
+{
+    <img src="~/Content/images.png" />
+
+
+}
+else
+{
+
+
+                                                            <img src='@Url.Action("imageGenerate", "Product", new { id = (long)o.product_idProduct })' />
+
+}
+                                                        
+                                                       </a>
+                                                </figure>
+                                                <div class="dropdown-cart-details">
+                                                    <p class="item-name">
+                                                        <a href="product.html">@o.product.name </a>
+                                                    </p>
+                                                    <p>
+                                                        @o.quantity x
+                                                        <span class="item-price">$ @o.product.price</span>
+                                                    </p>
+                                                </div><!-- End .dropdown-cart-details -->
+                                            </li>
+                                            }
+                                            
+
+                                        </ul>
+
+                                        <ul class="dropdown-cart-total">
+                                            <li><span class="dropdown-cart-total-title">Shipping:</span>$7</li>
+                                            <li><span class="dropdown-cart-total-title">Total:</span>$ @totalAmount<span class="sub-price">.99</span></li>
+                                        </ul><!-- .dropdown-cart-total -->
+                                        <div class="dropdown-cart-action">
+                                            <p><a href='@Url.Action("viewMyCart","Product")' class="btn btn-custom-2 btn-block">Cart</a></p>
+                                            <p><a href="checkout.html" class="btn btn-custom btn-block">Checkout</a></p>
+                                        </div><!-- End .dropdown-cart-action -->
+
+                                    </div><!-- End .dropdown-cart -->
+                                </div><!-- End .btn-group -->
+                            </div>
+                           
+                             <ul id="products-tabs-list" class="tab-style-1 clearfix">
+                                <li class="active"><a href="#all" data-toggle="tab">All</a></li>
+                                <li><a href="#latest" data-toggle="tab">Latest</a></li>
+                                <li><a href="#featured" data-toggle="tab">Featured</a></li>
+                                <li><a href="#bestsellers" data-toggle="tab">Bestsellers</a></li>
+                                <li><a href="#special" data-toggle="tab">Special</a></li>
+                                </ul>
+                           
+                                <br/><br />
+
+
+                            <div id="products-tabs-content" class="row tab-content">
+                                <div class="tab-pane active" id="all">
+
+
+
+
+
+                                    @foreach (var item in Model)
+                                {
+                                        <div class="col-md-4 col-sm-6 col-xs-12">
+
+                                            <div class="item">
+                                                <div class="item-image-container">
+                                                    <figure>
+                                                        <a href="product.html">
+
+
+                                                            @if (item.pictures.Count() == 0)
+{
+    <img src="~/Content/images.png"  />
+
+
+}
+else
+{
+                                                     <img  src='@Url.Action("imageGenerate", "Product", new { id = (long)item.idProduct })' />
+                                                            
+                                                         
+                                                            }
+
+
+                                                            <!--
+                                                                 <img src="/Content/images/products/phone1.jpg" alt="Phone 1" class="item-image">
+                                                                 <img src="/Content/products/phone1-hover.jpg" alt="Phone 1 Hover" class="item-image-hover">
+
+                                                             -->
+                                                        </a>
+                                                    </figure>
+                                                    <div class="item-price-container">
+                                                        <span class="old-price">$160</span>
+                                                        <span class="item-price">$ @item.price</span>
+                                                    </div>
+                                                    <span class="new-rect">New</span>
+                                                   
+                                                @if(item.promotion!=null) {
+                                                 <span class="discount-rect">- @item.promotion.taux %</span>
+
+                                                }
+                                                
+                                                
+                                                
+                                                </div><!-- End .item-image -->
+
+                                                <div class="item-meta-container">
+                                                    <div class="ratings-container">
+                                                        <div class="ratings">
+                                                            <div class="ratings-result" data-result="90" style="width: 84.6px;"></div>
+                                                        </div><!-- End .ratings -->
+                                                        <span class="ratings-amount" style="display: none;">
+                                                            3 Reviews
+                                                        </span>
+                                                    </div><!-- End .rating-container -->
+
+                                                <!-- A verifierrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr-->
+                                                    <h3 class="item-name"><a href="product.html">@item.name</a></h3>
+                                                   
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                 <!-- A verifierrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr-->
+ 
+                                                
+                                                    <div class="item-action">
+                                                        <a href='@Url.Action("addToCart","Product", new {idProduit=@item.idProduct,quantity=1})' class="item-add-btn">
+                                                            <span class="icon-cart-text">Add to Cart</span>
+                                                        </a>
+                                                        <div class="item-action-inner" style="visibility: hidden; overflow: hidden; width: 0px;">
+                                                            <a href="#" class="icon-button icon-like">Favourite</a>
+                                                            <a href="#" class="icon-button icon-compare">Checkout</a>
+                                                        </div><!-- End .item-action-inner -->
+                                                    </div>
+                                                
+                                                
+                                                     
+                                                    
+                                                <!-- End .item-action -->
+                                                </div><!-- End .item-meta-container -->
+                                            </div><!-- End .item -->
+
+
+                                        </div><!-- End .col-md-4 -->
+                                }
+
+                                </div>
+                            </div>
+                            <!-- Tabda e sale -->
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="xlg-margin"></div>
+            
+        </div>
+
+
+
+    </section>
+
+
+
+@Ajax.ActionLink(
+        "Add to Cart",
+        "addToCart",
+        "Product",
+        new
+        {
+            idProduit = 1,
+            quantity=2
+        },
+        new AjaxOptions
+        {
+            HttpMethod = "POST",
+            OnSuccess = "OKITEM",
+        }, new { @class = "item-add-btn" }
+    )  
+
+
+<script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
+
+

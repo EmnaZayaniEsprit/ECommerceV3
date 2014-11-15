@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -47,6 +48,7 @@
     <Compile Include="Entities\gouvernorat.cs" />
     <Compile Include="Entities\order.cs" />
     <Compile Include="Entities\orderitem.cs" />
+    <Compile Include="Entities\PayPalModel.cs" />
     <Compile Include="Entities\picture.cs" />
     <Compile Include="Entities\product.cs" />
     <Compile Include="Entities\productitem.cs" />
