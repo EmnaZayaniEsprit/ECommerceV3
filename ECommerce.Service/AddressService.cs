@@ -21,15 +21,24 @@ namespace ECommerce.Service
 
         public void updateAddress(address address)
         {
-            utow.AddressRepository.Update(address);
+            utow.AddressRepository.updateAddress(address);
             utow.Commit();
         }
+
+        public address getAddressByUser(user user)
+        {
+            int id = user.idUser;
+            return utow.AddressRepository.GetMany(a => a.user_idUser == id).Single();
+            
+        }
+
     }
 
     public interface IAddressService
     {
         void addAddress(address address);
         void updateAddress(address address);
+        address getAddressByUser(user user);
 
     }
 }

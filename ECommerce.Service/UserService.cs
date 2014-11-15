@@ -17,6 +17,21 @@ namespace ECommerce.Service
            utow = new UnitOfWork(dbfactory);
         }
       
+        public bool LoginExists(string login)
+        {
+            
+            user user = utow.UserRepository.Get( u=> u.login == login);
+
+            if (user == null)
+            {
+
+                return false;
+
+              
+            }
+            else return true;
+
+        }
       
         public Object AutentificationUser(string login, string password)
         {
@@ -51,7 +66,7 @@ namespace ECommerce.Service
 
         public void updateUser(user user)
         { 
-            utow.UserRepository.Update(user);
+            utow.UserRepository.updateUser(user);
             utow.Commit();
         }
 
@@ -85,6 +100,8 @@ namespace ECommerce.Service
         user getUser(int id);
         void updateUser(user user);
         void deleteUser(user user);
+
+        bool LoginExists(string login);
         Object AutentificationUser(string login, string password);
        // IEnumerable<user> getUsersByType(string type);
         IEnumerable<user> getAllUsers();

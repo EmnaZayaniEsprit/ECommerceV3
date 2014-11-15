@@ -33,8 +33,8 @@ namespace ECommerce.Data.Models.Mapping
 
             // Relationships
             this.HasOptional(t => t.user)
-                .WithMany(t => t.addresses)
-                .HasForeignKey(d => d.user_idUser);
+               .WithRequired(t => t.address);
+                //.HasForeignKey(d => d.user_idUser);
             this.HasOptional(t => t.gouvernorat)
                 .WithMany(t => t.addresses)
                 .HasForeignKey(d => d.gouvernorat_idGouvernorat);

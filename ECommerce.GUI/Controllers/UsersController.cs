@@ -61,27 +61,24 @@ namespace ECommerce.GUI.Controllers
         [HttpPost]
         public ActionResult Create(FormCollection collection, user user, HttpPostedFileBase file)
         {
-
-
-            if (ModelState.IsValid)
+            
+            if (ModelState.IsValid  )
             {
-
-                user.DTYPE = Request.Form["Type"].ToString();
-                user.sexe = Request.Form["Sexe"].ToString();
-                user.blocked = false;
-               
-                picture picture = new picture();
-                picture.description = file.FileName;
-                picture.picture1 = ConvertToBytes(file);
-               
-
-               Session["Image"] = picture;
-
-                Session["User"] = user;
-                return RedirectToAction("CreateStep2");
+                //if (userService.LoginExists(user.login) == false)
+                //{
+                    user.DTYPE = Request.Form["Type"].ToString();
+                    user.sexe = Request.Form["Sexe"].ToString();
+                    user.blocked = false;
+                    picture picture = new picture();
+                    picture.description = file.FileName;
+                    picture.picture1 = ConvertToBytes(file);
+                    Session["Image"] = picture;
+                    Session["User"] = user;
+                    return RedirectToAction("CreateStep2");
+                //}
+                //else return View(user);
             }
-           
-
+       
            else
 
                return View();
@@ -110,7 +107,8 @@ namespace ECommerce.GUI.Controllers
                 pictureService.addPicture(picture);
                 user.picture = picture;
                 user.idPicture = picture.idPicture;
-                user.addresses.Add(address);
+               // user.addresses.Add(address);
+                user.address = address;
                 userService.addUser(user);
                 return RedirectToAction("Index");
             }
@@ -144,70 +142,105 @@ namespace ECommerce.GUI.Controllers
 
             TempData["DType"] = DType;
             TempData["Sexe"] = Sexe;
+            Session["UserEdit"] = user;
             Session.Remove("idUser");
             Session.Add("idUser", id);
             return View(user);
 
-
-
         }
 
-        //
+      
+
+        
         // POST: /Users/Edit/5
         [HttpPost]
-        public ActionResult Edit(user user, FormCollection collection/* HttpPostedFileBase file*/)
+        public ActionResult Edit(user user, FormCollection collection, HttpPostedFileBase file)
         {
+        user = Session["UserEdit"] as user;
+    // Session.Remove("UserEdit");
 
+        if (ModelState.IsValid)
+       {
+           
+            user.DTYPE = Request.Form["Type"].ToString();
+              user.sexe = Request.Form["Sexe"].ToString();
+            user.blocked = false;
 
-            //picture picture = new picture();
-            //picture.description = file.FileName;
-            //picture.picture1 = ConvertToBytes(file);
-            //pictureService.addPicture(picture);
-            //user.picture = picture;
+         picture picture = new picture();
+         picture.description = file.FileName;
+             picture.picture1 = ConvertToBytes(file);
+         Session["Image"] = picture;
+         Session["User"] = user;
 
+   //pictureService.addPicture(picture);
+   //       user.picture = picture;
+   //       user.idPicture = picture.idPicture;
+               
+    
 
-            //address address1 = new address();
+       // userService.updateUser(user);
+        //return RedirectToAction("Index");
 
-            //address1.city = collection["city"];
-            //address1.street = collection["street"];
-            //address1.country = collection["country"];
-            //address1.number = Convert.ToInt32(collection["number"]);
-            //address1.postalCode = Convert.ToInt32(collection["postalCode"]);
+        return RedirectToAction("EditStep2");
+      }
+          return View(user);
 
-            //gouvernorat gouvernorat1 = new gouvernorat();
-            //gouvernorat1.gouvernoratName = collection["governorate"];
-            //address1.gouvernorat = gouvernorat1;
-
-
-            //addressService.updateAddress(address1);
-
-
-            //user.DTYPE = Request.Form["Type"].ToString();
-            //user.sexe = Request.Form["Sexe"].ToString();
-            //user.blocked = false;
-
-            //    userService.updateUser(userService.getUser(user.idUser));
-            //    return RedirectToAction("Index");
+        }
+        public ActionResult EditStep2()
+        {
+            user user = Session["UserEdit"] as user;
+            address address = new address();
+            address = addressService.getAddressByUser(user);
+            //ICollection<address> list1 = user.addresses;
+            //foreach (var item in list1)
+            //{
+            //    list1.Remove(item);
             //}
-            //return View(user);
-            
+            return View(address); 
+        }
+
+        public ActionResult ValidateEdit(FormCollection collection, address address)
+        {
+            user user = Session["UserEdit"] as user;
+            //Session.Remove("UserEdit");
+         
+            picture picture = Session["Image"] as picture;
+
+           
 
             if (ModelState.IsValid)
             {
+                
+                
+                //gouvernorat gouvernorat1 = new gouvernorat();
+                //gouvernorat1.gouvernoratName = collection["governorate"];
+                //address.gouvernorat = gouvernorat1;
 
+                pictureService.addPicture(picture);
+                user.picture = picture;
+                user.idPicture = picture.idPicture;
 
-                user.idUser = (int)Session["idUser"];
-                Session.Remove("idUser");
-                user.DTYPE = Request.Form["Type"].ToString();
-                user.sexe = Request.Form["Sexe"].ToString();
+               address.idAddress= addressService.getAddressByUser(user).idAddress;
+                
+               
+               // List<address> nvlist = new List<Data.Models.address>();
+               // nvlist.Add(address);
+               // user.addresses.RemoveAll( a=>a.user_idUser == user.idUser);
+
+                //user.addresses = nvlist;
+
+               
+                user.address = address;
+                addressService.updateAddress(address);
+                
                 userService.updateUser(user);
                 return RedirectToAction("Index");
             }
-            return View(user);
 
+            else
+
+                return RedirectToAction("EditStep2"); 
         }
-
-
         //
         // GET: /Users/Delete/5
 

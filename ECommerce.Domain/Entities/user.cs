@@ -9,7 +9,8 @@ namespace ECommerce.Data.Models
     {
         public user()
         {
-            this.addresses = new List<address>();
+            //this.addresses = new List<address>();
+            this.address = new address();
             this.creditcards = new List<creditcard>();
             this.orders = new List<order>();
             this.products = new List<product>();
@@ -64,7 +65,8 @@ namespace ECommerce.Data.Models
         public Nullable<int> idPicture { get; set; }
 
         [Display(Name = "Address")]
-        public virtual ICollection<address> addresses { get; set; }
+        //public virtual ICollection<address> addresses { get; set; }
+       public address address { get; set; }
         public virtual ICollection<creditcard> creditcards { get; set; }
         public virtual ICollection<order> orders { get; set; }
 
