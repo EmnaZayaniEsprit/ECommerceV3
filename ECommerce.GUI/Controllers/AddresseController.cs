@@ -1,5 +1,4 @@
-﻿using ECommerce.Service;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,40 +6,31 @@ using System.Web.Mvc;
 
 namespace ECommerce.GUI.Controllers
 {
-    public class ProductsController : Controller
+    public class AddresseController : Controller
     {
-
-        IProductService iprod;
-        public ProductsController(IProductService iprod)
-        {
-            this.iprod = iprod;
-
-        }
         //
-        // GET: /Products/
+        // GET: /Addresse/
         public ActionResult Index()
         {
-            var products = iprod.getAllProduct().ToList();
-            return View(products);
+            return View();
         }
 
         //
-        // GET: /Products/Details/5
+        // GET: /Addresse/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
         //
-        // GET: /Products/Create
+        // GET: /Addresse/Create
         public ActionResult Create()
         {
-
             return View();
         }
 
         //
-        // POST: /Products/Create
+        // POST: /Addresse/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
@@ -57,14 +47,14 @@ namespace ECommerce.GUI.Controllers
         }
 
         //
-        // GET: /Products/Edit/5
+        // GET: /Addresse/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
         //
-        // POST: /Products/Edit/5
+        // POST: /Addresse/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -81,14 +71,14 @@ namespace ECommerce.GUI.Controllers
         }
 
         //
-        // GET: /Products/Delete/5
+        // GET: /Addresse/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
         //
-        // POST: /Products/Delete/5
+        // POST: /Addresse/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

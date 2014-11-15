@@ -16,7 +16,7 @@
             @Html.DisplayNameFor(model => model.idUser)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.blocked)
+            @Html.DisplayNameFor(model => model.DTYPE)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.email)
@@ -50,7 +50,7 @@
                 @Html.DisplayFor(modelItem => item.idUser)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.blocked)
+                @Html.DisplayFor(modelItem => item.DTYPE)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.email)
@@ -74,9 +74,9 @@
                 @Html.DisplayFor(modelItem => item.idPicture)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.idUser }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new {  /*id=item.idUser*/ })
+                @Html.ActionLink("Edit", "Edit", new { id = item.idUser, Dtype = item.DTYPE, Sexe = item.sexe }) |
+                @Html.ActionLink("Details", "Details", new { id=item.idUser }) |
+                @Html.ActionLink("Delete", "Delete", new {  id=item.idUser})
             </td>
         </tr>
     }

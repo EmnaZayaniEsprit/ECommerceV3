@@ -10,9 +10,28 @@ namespace ECommerce.Service
 {
     public class UserService : IUserService
     {
+        static DatabaseFactory dbfactory = null;
+        UnitOfWork utow = null;
+        public UserService()
+        {  dbfactory = new DatabaseFactory();
+           utow = new UnitOfWork(dbfactory);
+        }
+      
+        public bool LoginExists(string login)
+        {
+            
+            user user = utow.UserRepository.Get( u=> u.login == login);
 
-       static DatabaseFactory dbfactory = new DatabaseFactory();
-        UnitOfWork utow = new UnitOfWork(dbfactory);
+            if (user == null)
+            {
+
+                return false;
+
+              
+            }
+            else return true;
+
+        }
       
         public Object AutentificationUser(string login, string password)
         {
@@ -47,7 +66,7 @@ namespace ECommerce.Service
 
         public void updateUser(user user)
         { 
-            utow.UserRepository.Update(user);
+            utow.UserRepository.updateUser(user);
             utow.Commit();
         }
 
@@ -81,6 +100,8 @@ namespace ECommerce.Service
         user getUser(int id);
         void updateUser(user user);
         void deleteUser(user user);
+
+        bool LoginExists(string login);
         Object AutentificationUser(string login, string password);
        // IEnumerable<user> getUsersByType(string type);
         IEnumerable<user> getAllUsers();
