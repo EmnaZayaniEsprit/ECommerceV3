@@ -65,9 +65,13 @@
     <Compile Include="Infrastructure\IUnitOfWork.cs" />
     <Compile Include="Infrastructure\RepositoryBase.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
-    <Compile Include="Migrations\201411101648462_FirstMigration.cs" />
-    <Compile Include="Migrations\201411101648462_FirstMigration.Designer.cs">
-      <DependentUpon>201411101648462_FirstMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201411142125047_FirstMigration.cs" />
+    <Compile Include="Migrations\201411142125047_FirstMigration.Designer.cs">
+      <DependentUpon>201411142125047_FirstMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201411142128040_SecondMigration.cs" />
+    <Compile Include="Migrations\201411142128040_SecondMigration.Designer.cs">
+      <DependentUpon>201411142128040_SecondMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ecommerceContext.cs" />
@@ -118,12 +122,15 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201411101648462_FirstMigration.resx">
-      <DependentUpon>201411101648462_FirstMigration.cs</DependentUpon>
-    </EmbeddedResource>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
+    <EmbeddedResource Include="Migrations\201411142125047_FirstMigration.resx">
+      <DependentUpon>201411142125047_FirstMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201411142128040_SecondMigration.resx">
+      <DependentUpon>201411142128040_SecondMigration.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -16,13 +16,17 @@ namespace ECommerce.Service
         {
             return utow.PictureRepository.GetAll().ToList();
         }
+        public picture getPictureRepositoryById(int idPicture)
+        {
+            return utow.PictureRepository.getPictureByID(idPicture);
+        }
     }
 
 
     public interface IPictureSupplierService
     {
 
-
+        picture getPictureRepositoryById(int idPicture);
         List<picture> getAllPicture();
     }
 

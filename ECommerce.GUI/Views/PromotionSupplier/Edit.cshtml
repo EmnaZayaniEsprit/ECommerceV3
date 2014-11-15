@@ -2,6 +2,8 @@
 
 @{
     ViewBag.Title = "Edit";
+    List<ECommerce.Data.Models.product> produitsNonPromotion = new List<ECommerce.Data.Models.product>();
+    produitsNonPromotion = ViewBag.nvproducts;
     Layout = "~/Views/Shared/IndexLayoutSupplier.cshtml";
 }
 
@@ -74,4 +76,77 @@
 
 <div>
     @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+
+
+
+
+            <div class="purchased-items-container carousel-wrapper">
+                <header class="content-title">
+                    <div class="title-bg">
+                        <h2 class="title">Liste des Produits sans des Promotions</h2>
+                    </div><!-- End .title-bg -->
+
+                </header>
+
+                <div class="carousel-controls">
+                    <div id="purchased-items-slider-prev" class="carousel-btn carousel-btn-prev"></div><!-- End .carousel-prev -->
+                    <div id="purchased-items-slider-next" class="carousel-btn carousel-btn-next carousel-space"></div><!-- End .carousel-next -->
+                </div><!-- End .carousel-controllers -->
+                <div class="purchased-items-slider owl-carousel">
+
+                    @foreach (var item in produitsNonPromotion.ToList())
+                    {
+
+                        <div class="item">
+
+                            <div class="item-image-container">
+                                <figure>
+                                    @if (@item.pictures.Count > 0)
+                                    {
+                                        <a href="/ProductSupplier/Details/@item.idProduct">
+                                            <img src="@Url.Action("Transfer", "ProductSupplier", new { idPicture =(@item.pictures.ElementAt(0).idPicture) }  )" alt="Lowlands Lace Blouse">
+                                        </a>
+                                    }
+                                    else if (@item.pictures.Count == 0)
+                                    {
+                                        <a href="/ProductSupplier/Details/@item.idProduct">
+                                            <img src="/Content/images/no-photo.jpg" class="item-image" alt="Lowlands Lace Blouse">
+                                        </a>
+                                    }
+
+                                </figure>
+                                <div class="item-price-container">
+                                    <span class="item-price">@item.price $</span>
+                                </div>
+
+                                <span class="discount-rect">@Model.taux %</span>
+                            </div><!-- End .item-image -->
+                            <div class="item-meta-container">
+
+                                <h3 class="item-name"><a href="product.html">@item.name</a></h3>
+                                <div class="item-action">
+                                    <a href="@Url.Action("updatePromotionAddProduct", "PromotionSupplier", new { idproduct = @item.idProduct,idPromotion=@Model.idPromotion })" class="item-add-btn">
+                                        <span class="icon-cart-text">Add To Promotion</span>
+                                    </a>
+                                    <div class="item-action-inner">
+
+                                    </div><!-- End .item-action-inner -->
+                                </div><!-- End .item-action -->
+                            </div><!-- End .item-meta-container -->
+                        </div><!-- End .item -->
+                    }
+
+                </div><!--purchased-items-slider -->
+            </div><!-- End .purchased-items-container -->
+        </div>
+    </div>
 </div>

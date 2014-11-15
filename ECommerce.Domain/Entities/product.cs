@@ -7,6 +7,7 @@ namespace ECommerce.Data.Models
     {
         public product()
         {
+           // this.promotion = new promotion();
             this.orderitems = new List<orderitem>();
             this.pictures = new List<picture>();
             this.productitemsuppliers = new List<productitemsupplier>();

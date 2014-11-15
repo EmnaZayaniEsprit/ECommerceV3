@@ -18,6 +18,7 @@ namespace ECommerce.Data.Models
             this.reclamations = new List<reclamation>();
             this.recommendations = new List<recommendation>();
             this.reviews = new List<review>();
+           this.promotions = new List<promotion>();
         }
 
         //[Required(ErrorMessage = "Please select an account type")]
@@ -78,5 +79,6 @@ namespace ECommerce.Data.Models
         public virtual ICollection<reclamation> reclamations { get; set; }
         public virtual ICollection<recommendation> recommendations { get; set; }
         public virtual ICollection<review> reviews { get; set; }
+        public virtual ICollection<promotion> promotions { get; set; }
     }
 }

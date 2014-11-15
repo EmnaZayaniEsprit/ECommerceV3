@@ -12,7 +12,7 @@ namespace ECommerce.GUI.Controllers
 {
     public class ProductSupplierController : Controller
     {
-
+        public static int idUser = 2;
         IProductSupplierService produitService;
         ICategorySupplierService categoryService;
         IPromotionSupplierService promotionService;
@@ -36,7 +36,21 @@ namespace ECommerce.GUI.Controllers
         // GET: /ProductSupplier/
         public ActionResult Index()
         {
-            var produits = produitService.getAllProducts().ToList();
+            //var products = produitService.getAllProducts().ToList();
+            var produits = produitService.getManyProduct(idUser).ToList();
+            
+            foreach(var  produit in produits){
+
+                if (produit.promotion_idPromotion != null)
+                {
+                    int idd=produit.promotion_idPromotion.Value;
+
+                    produit.promotion = promotionService.getPromotionRepository(idd);
+
+                }
+
+            }
+
             List<int> idImages =new List<int>(); ;
             foreach (var item in produits)
             {
@@ -63,7 +77,7 @@ namespace ECommerce.GUI.Controllers
         // GET: /ProductSupplier/Details/5
         public ActionResult Details(int id)
         {
-            var  product = produitService.getProductById(id);
+            var product = produitService.getProductReposotoryById(id);
             
 
             return View(product);
@@ -74,10 +88,10 @@ namespace ECommerce.GUI.Controllers
         public ActionResult Create()
         {
             var categories = categoryService.getAllCategory();
-            var promotions = promotionService.getAllPromotion();
+            var promotions = promotionService.getManyPromotion(idUser);
             var users = userService.getAllUser();
             ViewBag.category_idCategory = new SelectList(categories, "idCategory", "name");
-            ViewBag.promotion_idPromotion = new SelectList(promotions, "idPromotion", "description");
+            ViewBag.promotion_idPromotion = new SelectList(promotions, "idPromotion", "nomPromotion");
             ViewBag.supplier_idUser = new SelectList(users, "idUser", "DTYPE");
 
             return View();
@@ -96,7 +110,7 @@ namespace ECommerce.GUI.Controllers
 
                 img.picture1 = ConvertToBytes(image);
                 product.pictures.Add(img);
-
+                product.supplier_idUser = idUser;
                 produitService.addProduct(product);
                
                 
@@ -107,7 +121,7 @@ namespace ECommerce.GUI.Controllers
             var promotions = promotionService.getAllPromotion();
             var users = userService.getAllUser();
             ViewBag.category_idCategory = new SelectList(categories, "idCategory", "name");
-            ViewBag.promotion_idPromotion = new SelectList(promotions, "idPromotion", "description");
+            ViewBag.promotion_idPromotion = new SelectList(promotions, "idPromotion", "nomPromotion");
 
             ViewBag.supplier_idUser = new SelectList(users, "idUser", "DTYPE");
             return View(product);
@@ -131,7 +145,7 @@ namespace ECommerce.GUI.Controllers
             var promotions = promotionService.getAllPromotion();
             var users = userService.getAllUser();
             ViewBag.category_idCategory = new SelectList(categories, "idCategory", "name");
-            ViewBag.promotion_idPromotion = new SelectList(promotions, "idPromotion", "description");
+            ViewBag.promotion_idPromotion = new SelectList(promotions, "idPromotion", "nomPromotion");
             ViewBag.supplier_idUser = new SelectList(users, "idUser", "DTYPE");
 
 
@@ -174,7 +188,7 @@ namespace ECommerce.GUI.Controllers
             var promotions = promotionService.getAllPromotion();
             var users = userService.getAllUser();
             ViewBag.category_idCategory = new SelectList(categories, "idCategory", "name");
-            ViewBag.promotion_idPromotion = new SelectList(promotions, "idPromotion", "description");
+            ViewBag.promotion_idPromotion = new SelectList(promotions, "idPromotion", "nomPromotion");
 
             ViewBag.supplier_idUser = new SelectList(users, "idUser", "DTYPE");
             return RedirectToAction("Edit");
@@ -184,7 +198,7 @@ namespace ECommerce.GUI.Controllers
         // GET: /ProductSupplier/Delete/5
         public ActionResult Delete(int id)
         {
-            product product = produitService.getProductById(id);
+            product product = produitService.getProductReposotoryById(id);
             produitService.DeleteProduct(product);
             return RedirectToAction("Index");
         }

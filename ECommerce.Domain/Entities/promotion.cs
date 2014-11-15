@@ -9,11 +9,14 @@ namespace ECommerce.Data.Models
         public promotion()
         {
             this.products = new List<product>();
+            this.user = new user();
         }
 
 
         [Key]
         public int idPromotion { get; set; }
+        public int idUser { get; set; }
+        public user user { get; set; }
         public Nullable<System.DateTime> dateDebut { get; set; }
         public Nullable<System.DateTime> dateFin { get; set; }
         public string description { get; set; }

@@ -10,6 +10,7 @@ namespace ECommerce.GUI.Controllers
 {
     public class PromotionSupplierController : Controller
     {
+        public static int idUser=2;
         IProductSupplierService produitService;
         ICategorySupplierService categoryService;
         IPromotionSupplierService promotionService;
@@ -27,7 +28,8 @@ namespace ECommerce.GUI.Controllers
         public ActionResult Index()
         {
 
-            var promotions = promotionService.getAllPromotion().ToList();
+            var promotions = promotionService.getManyPromotion(idUser);
+            
 
 
             return View(promotions.ToList());
@@ -37,8 +39,8 @@ namespace ECommerce.GUI.Controllers
         // GET: /PromotionSupplier/Details/5
         public ActionResult Details(int id)
         {
-            var promotion = promotionService.getPromotionById(id);
-            var products = produitService.getAllProducts();
+            var promotion = promotionService.getPromotionRepository(id);
+            var products = produitService.getManyProduct(idUser);
             List<product> nvpro = new List<product>();
            
             foreach (product pro in products.ToList())
@@ -51,7 +53,7 @@ namespace ECommerce.GUI.Controllers
 
             }
             promotion.products = nvpro;
-            ViewBag.nvproduit = nvpro;
+            //ViewBag.nvproduit = nvpro;
             
             return View(promotion);
         }
@@ -70,6 +72,7 @@ namespace ECommerce.GUI.Controllers
         {
             try
             {
+                promotion.idUser = idUser;
                 promotionService.addPromotion(promotion);
 
                 return RedirectToAction("Index");
@@ -84,8 +87,21 @@ namespace ECommerce.GUI.Controllers
         // GET: /PromotionSupplier/Edit/5
         public ActionResult Edit(int id)
         {
-            promotion promotion = promotionService.getPromotionById(id);
+            promotion promotion = promotionService.getPromotionRepository(id);
 
+            var products = produitService.getManyProduct(idUser);
+            List<product> nvpro = new List<product>();
+            foreach (product pro in products.ToList())
+            {
+                if (pro.promotion_idPromotion == null)
+                {
+                    // products.Remove(pro);
+                    nvpro.Add(pro);
+                }
+
+            }
+
+            ViewBag.nvproducts = nvpro;
             return View(promotion);
         }
 
@@ -94,7 +110,7 @@ namespace ECommerce.GUI.Controllers
         [HttpPost]
         public ActionResult Edit(int id, promotion promotion)
         {
-           
+            promotion.idUser = idUser;
                 promotionService.updatePromotion(promotion);
 
                 
@@ -109,7 +125,7 @@ namespace ECommerce.GUI.Controllers
         // GET: /PromotionSupplier/Delete/5
         public ActionResult Delete(int id)
         {
-            promotionService.deletePromotion(promotionService.getPromotionById(id));
+            promotionService.deletePromotion(promotionService.getPromotionRepository(id));
 
             return RedirectToAction("Index");
         }
@@ -130,5 +146,41 @@ namespace ECommerce.GUI.Controllers
                 return View();
             }
         }
+
+        
+        public ActionResult updatePromotion(int idProduct,int idPromotion)
+        {
+            var product = produitService.getProductReposotoryById(idProduct);
+
+            product.promotion = null;
+            product.promotion_idPromotion = null;
+            produitService.updateProduct(product);
+
+           // var promotion = promotionService.getPromotionRepository(idPromotion);
+
+
+            return RedirectToAction("Index");
+        }
+
+
+        public ActionResult updatePromotionAddProduct(int idProduct, int idPromotion)
+        {
+            var product = produitService.getProductReposotoryById(idProduct);
+
+            //var promotion = promotionService.getPromotionRepository(idPromotion);
+
+
+            
+            product.promotion_idPromotion = idPromotion;
+            produitService.updateProduct(product);
+
+
+
+
+            return RedirectToAction("Details", new { id=idPromotion });
+        }
+
+
+
     }
 }

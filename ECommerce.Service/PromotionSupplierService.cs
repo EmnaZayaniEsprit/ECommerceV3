@@ -25,7 +25,8 @@ namespace ECommerce.Service
 
         public void updatePromotion(promotion promotion)
         {
-            utow.PromotionRepository.Update(promotion);
+            utow.PromotionRepository.updatePromotion(promotion);
+            //utow.PromotionRepository.Update(promotion);
             utow.Commit();
         }
 
@@ -36,15 +37,29 @@ namespace ECommerce.Service
 
         }
 
-        public promotion getPromotionById(int idPromotion)
+        public promotion getPromotionRepository(int idPromotion)
+        {
+            return utow.PromotionRepository.getPromotionByID(idPromotion);
+           
+        }
+         public promotion getPromotionById(int idPromotion)
         {
             return utow.PromotionRepository.GetById(idPromotion);
+            
         }
+         public List<promotion> getManyPromotion(int idUser)
+         {
+             return utow.PromotionRepository.GetMany(p => p.idUser == idUser).ToList();
+
+
+
+         }
+        
     }
 
 
 
-
+     
     public interface IPromotionSupplierService
     {
         void addPromotion(promotion promotion);
@@ -52,7 +67,9 @@ namespace ECommerce.Service
         void deletePromotion(promotion promotion);
         promotion getPromotionById(int idPromotion);
 
+        promotion getPromotionRepository(int idPromotion);
         List<promotion> getAllPromotion();
+        List<promotion> getManyPromotion(int idUser);
     }
 
 }

@@ -14,13 +14,17 @@ namespace ECommerce.Service
 
         static DatabaseFactory dbfactory = new DatabaseFactory();
         UnitOfWork utow = new UnitOfWork(dbfactory);
-
+        private ecommerceContext db = new ecommerceContext();
         public FileContentResult Transfer(int idPicture)
         {
 
            // picture picture = utow.PictureRepository.Get(x => x.idPicture == idPicture);
+            //picture picture = utow.PictureRepository.getPictureByID(idPicture);
             picture picture = utow.PictureRepository.GetById(idPicture);
-  
+          
+            
+
+
             byte[] imgbyte = picture.picture1;
 
             return new FileContentResult(imgbyte, "image/jpg");
@@ -62,6 +66,28 @@ namespace ECommerce.Service
             utow.Commit();
 
         }
+
+
+        public void updateProduct(product p)
+        {
+            utow.ProductRepository.updateProduct(p);
+            utow.Commit();
+
+        }
+        public product getProductReposotoryById(int idProduct) {
+
+            return utow.ProductRepository.getProductByID(idProduct);
+
+        
+        }
+        public List<product> getManyProduct(int idUser)
+        {
+            return utow.ProductRepository.GetMany(p => p.supplier_idUser == idUser).ToList();
+
+
+
+        }
+
         
     }
 
@@ -75,6 +101,9 @@ namespace ECommerce.Service
         void DeleteProduct(product p);
         void EditProduct(product p);
         product getProduct(int id);
+        void updateProduct(product product);
+        product getProductReposotoryById(int idProduct);
+        List<product> getManyProduct(int idUser);
     }
 
 }

@@ -70,7 +70,7 @@
 
                             </figure>
                             <div class="item-price-container">
-                                <span class="item-price">@item.price $></span>
+                                <span class="item-price">@item.price $</span>
                             </div>
                             
                             <span class="discount-rect">@Model.taux %</span>
@@ -79,7 +79,7 @@
                          
                             <h3 class="item-name"><a href="product.html">@item.name</a></h3>
                             <div class="item-action">
-                                <a href="#" class="item-add-btn">
+                                <a href="@Url.Action("updatePromotion", "PromotionSupplier", new { idproduct = @item.idProduct,idPromotion=@Model.idPromotion })" class="item-add-btn">
                                     <span class="icon-cart-text">Delete from This Promotion</span>
                                 </a>
                                 <div class="item-action-inner">
@@ -88,22 +88,10 @@
                             </div><!-- End .item-action -->
                         </div><!-- End .item-meta-container -->
                     </div><!-- End .item -->
-                    
-                    
-                
-              } 
+ } 
 
-                   
-
-                </div><!--purchased-items-slider -->
+                   </div><!--purchased-items-slider -->
             </div><!-- End .purchased-items-container -->
-
-
-
-
-
-
-
         </div>
     </div>
 </div>

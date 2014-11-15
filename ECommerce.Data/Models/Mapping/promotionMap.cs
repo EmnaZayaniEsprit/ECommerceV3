@@ -25,6 +25,8 @@ namespace ECommerce.Data.Models.Mapping
             this.Property(t => t.description).HasColumnName("description");
             this.Property(t => t.nomPromotion).HasColumnName("nomPromotion");
             this.Property(t => t.taux).HasColumnName("taux");
+            this.Property(t => t.idUser).HasColumnName("Iduser");
+
         }
     }
 }

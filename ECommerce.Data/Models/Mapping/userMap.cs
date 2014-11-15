@@ -51,7 +51,7 @@ namespace ECommerce.Data.Models.Mapping
             this.HasOptional(t => t.picture)
                 .WithMany(t => t.users)
                 .HasForeignKey(d => d.idPicture);
-
+            
         }
     }
 }

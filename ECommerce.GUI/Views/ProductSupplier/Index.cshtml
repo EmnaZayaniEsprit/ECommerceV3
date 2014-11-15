@@ -37,19 +37,21 @@
                 </thead>
 
                 <tbody>
-                @foreach (var item in Model)
+                @{
+                    foreach (var item in Model)
                       {
+                    
                       <tr>
                         <td class="item-name-col">
                              <figure>
                      @if (@item.pictures.Count > 0)
-{
-    <a href="/ProductSupplier/Details/@item.idProduct">
-        <img src="@Url.Action("Transfer", "ProductSupplier", new { idPicture =(@item.pictures.ElementAt(0).idPicture) }  )" alt="Lowlands Lace Blouse">
-    </a>
-}
-else if (@item.pictures.Count == 0)
-{
+                {
+                      <a href="/ProductSupplier/Details/@item.idProduct">
+                     <img src="@Url.Action("Transfer", "ProductSupplier", new { idPicture =(@item.pictures.ElementAt(0).idPicture) }  )" alt="Lowlands Lace Blouse">
+                    </a>
+                        }
+                        else if (@item.pictures.Count == 0)
+                        {
                         <a href="/ProductSupplier/Details/@item.idProduct">
                          <img src="/Content/images/no-photo.jpg"  class="item-image" alt="Lowlands Lace Blouse"></a>
                      }
@@ -73,10 +75,23 @@ else if (@item.pictures.Count == 0)
                             <span class="item-price-special"> @item.category.name </span>
                           
                         </td>
-                          <td class="item-total-col">
-                              <span class="item-price-special"> @item.promotion.nomPromotion</span>
 
-                          </td>
+                         
+                          @if (@item.promotion_idPromotion ==null)
+                          {
+                              <td class="item-total-col">
+                                  <span class="item-price-special"> aucune </span>
+                              </td>
+                          }
+                           else 
+                          {
+                              <td class="item-total-col">
+                                  <span class="item-price-special"> @item.promotion.nomPromotion   </span>
+                              </td>   
+                          } 
+
+                          
+
                           <td class="item-total-col">
                               <a href="@Url.Action("Delete", "ProductSupplier", new { id =(@item.idProduct) }  )" class="close-button"></a>
 
@@ -84,9 +99,9 @@ else if (@item.pictures.Count == 0)
                     </tr>
                    
 
-}               
+                       }               
                     
-                    
+                       }
 
                 </tbody>
                 <tfoot>
